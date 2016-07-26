@@ -53,6 +53,10 @@ var CourseSchema = new Schema({
     type: Array,
     default: []
   },
+  level: {
+    type: String,
+    default: "None"
+  },
   created: {
     type: Date,
     default: Date.now

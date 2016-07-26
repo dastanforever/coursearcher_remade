@@ -16,6 +16,22 @@ var InstructorSchema = new Schema({
     required: 'Please fill Instructor name',
     trim: true
   },
+  platform: {
+    type: String,
+    default: 'Random'
+  },
+  courses: {
+    type: Array,
+    default: []
+  },
+  bio: {
+    type: String,
+    default: "We don't have much info."
+  },
+  image: {
+    type: String,
+    default: "Default Image URL."
+  },
   created: {
     type: Date,
     default: Date.now
