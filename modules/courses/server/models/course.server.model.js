@@ -36,7 +36,7 @@ var CourseSchema = new Schema({
     default: 'other'
   },
   instructor_id: {
-    type: Schema.ObjectId,
+    type: Array,
 //    default: 1,
 //    ref: 'Instructor'
   },
@@ -48,6 +48,10 @@ var CourseSchema = new Schema({
     type: String,
     default: "",
     index: true
+  },
+  language: {
+    type: Array,
+    default: []
   },
   created: {
     type: Date,

@@ -10,9 +10,15 @@ exports.requestApi = function (url, params, method, callback) {
     };
 
     if(method == 'GET') {
+        paramString = "";
+        for (var param in params) {
+            paramString += param + '=' + params[param] + '&'; 
+        }
+
+        url += '?' + paramString;
+
         request.get({
 	        url: url,
-            form: params,
             proxy: process.env.PROXY,
             agentOptions: {
                     secureProtocol: 'SSLv3_method'
@@ -32,7 +38,7 @@ exports.requestApi = function (url, params, method, callback) {
     }
     else if(method == 'POST') {
         request.post({
-            url: url, 
+            url: url,
             form: params,
             proxy: process.env.PROXY,
             agentOptions: {

@@ -12,8 +12,23 @@ exports.saveCourses = function (result) {
         elements = response['elements'];
         
         elements.forEach(function(element) {
-            //var course = new Course()
-            console.log(element);
+            if (Course.findOne({platform_id: element.id}, 'name', function(err, existingCourse) {
+                if(!existingCourse) {
+                    var course = new Course();
+                    course.description = element.description;
+                    course.name = element.name;
+                    course.link = 'https://www.coursera.org/learn/' + element.slug;
+                    course.platform_id = element.id;
+                    course.instructor_id = element.instructorIds;
+                    course.image_url = element.photoUrl;
+                    course.language = element.primaryLanguages;
+                    course.save(function(err){
+                        if(err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            }));
         }, this);
     }
 }

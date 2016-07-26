@@ -16,20 +16,22 @@ var server = app.start();
 
 var request = require('request');
 
-var params = {
-    'start':2000,
-    'limit':20,
-    'fields':'id, slug,name,primaryLanguages,photoUrl,instructorIds,description,previewLink'
+var courseraParams = {
+    start:0,
+    limit:20,
+    fields:'id, slug,name,primaryLanguages,photoUrl,instructorIds,description,previewLink'
 }
 
-var resp = utilities.requestApi('https://api.coursera.org/api/courses.v1', params, 'GET', coursera.saveCourses);
-//var CronJob = require('cron').CronJob;
-//
-//var getCourseraListJob = new CronJob('* * * * * *', function() {
-//    // make request library.
-//    console.log(resp);
-//  }, function () {
-//    /* This function is executed when the job stops */
-//  },
-//  true
-//);
+var CronJob = require('cron').CronJob;
+
+var getCourseraListJob = new CronJob('*/3 * * * * *', function() {
+    // make request library.
+    utilities.requestApi('https://api.coursera.org/api/courses.v1', courseraParams, 'GET', coursera.saveCourses);
+    courseraParams.start += courseraParams.start + courseraParams.limit;
+  }, function () {
+    /* This function is executed when the job stops */
+  },
+  true
+);
+
+getCourseraListJob.start();
