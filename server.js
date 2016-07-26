@@ -24,10 +24,10 @@ var courseraParams = {
 
 var CronJob = require('cron').CronJob;
 
-var getCourseraListJob = new CronJob('* */30 * * * *', function() {
+var getCourseraListJob = new CronJob('*/3 * * * * *', function() {
     // make request library.
     utilities.requestApi('https://api.coursera.org/api/courses.v1', courseraParams, 'GET', coursera.saveCourses);
-    courseraParams[start] += courseraParams[start] + courseraParams[limit];
+    courseraParams.start += courseraParams.start + courseraParams.limit;
   }, function () {
     /* This function is executed when the job stops */
   },

@@ -26,9 +26,6 @@ exports.saveCourses = function (result) {
                         if(err) {
                             console.log(err);
                         }
-                        else {
-                            console.log(course);
-                        }
                     });
                 }
             })); 
