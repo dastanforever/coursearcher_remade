@@ -14,8 +14,8 @@ exports.requestApi = function (url, params, method, callback) {
         for (var param in params) {
             paramString += param + '=' + params[param] + '&'; 
         }
-
-        url += '?' + paramString;
+        if(paramString.length > 0)
+            url += '?' + paramString;
 
         request.get({
 	        url: url,
